@@ -134,6 +134,7 @@ body {
         width: 23px;
         height: 38px;
         margin: 4px;
+        text-align: center;
     }
 
     .key-container button:nth-child(11) {
