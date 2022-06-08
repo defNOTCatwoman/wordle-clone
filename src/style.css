@@ -1,9 +1,9 @@
 * {
-    color:white;
+    color: white;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
-body{
+body {
     background-color: #121213;
 }
 
@@ -15,33 +15,33 @@ body{
     align-items: center;
 }
 
-.title-container{
+.title-container {
     text-align: center;
     width: 510px;
     border-bottom: solid 1px #3a3a3c;
 }
 
 .tile-container {
-    width:330px;
+    width: 330px;
     margin-bottom: 30px;
 }
 
 .key-container {
-    width:510px;
-    display:flex;
-    flex-wrap:wrap;
+    width: 510px;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .key-container button {
     width: 43px;
     height: 58px;
     border-radius: 4px;
-    border:none;
+    border: none;
     background-color: #818384;
     margin: 4px;
 }
 
-.key-container button:nth-child(11){
+.key-container button:nth-child(11) {
     margin-left: 30px;
 }
 
@@ -55,7 +55,7 @@ body{
 }
 
 .tile-container .tile {
-    width:62px;
+    width: 62px;
     height: 62px;
     border: 2px solid #3a3a3c;
     box-sizing: border-box;
@@ -82,13 +82,13 @@ body{
     width: 100px;
     height: 48px;
     border-radius: 4px;
-    border:none;
+    border: none;
     background-color: #818384;
     margin: 4px;
     visibility: hidden;
 }
 
-.tile.flip{
+.tile.flip {
     animation: 0.5s linear flipping;
 }
 
@@ -96,9 +96,11 @@ body{
     0% {
         transform: rotateX(0deg);
     }
+
     50% {
         transform: rotateX(90deg);
     }
+
     100% {
         transform: rotateX(0deg);
     }
@@ -106,15 +108,64 @@ body{
 
 .grey-overlay {
     background-color: #3a3a3c !important;
-    border: none !important; 
+    border: none !important;
 }
 
 .yellow-overlay {
     background-color: #b59f3a !important;
-    border: none !important; 
+    border: none !important;
 }
 
 .green-overlay {
     background-color: #538d4e !important;
-    border: none !important; 
+    border: none !important;
+}
+
+@media only screen and (max-width:500px) {
+    .key-container {
+        width: 350px;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .key-container button {
+        width: 23px;
+        height: 38px;
+    }
+
+    .key-container button:nth-child(11) {
+        margin-left: 25px;
+    }
+
+    .key-container button:nth-child(20),
+    .key-container button:nth-child(28) {
+        width: 49px;
+    }
+
+    .tile-container div {
+        display: flex;
+        justify-content: center;
+    }
+    
+    .tile-container .tile {
+        width: 42px;
+        height:42px;
+        border: 2px solid #3a3a3c;
+        box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: white;
+        margin: 2px;
+    }
+    .tile-container {
+        width: 330px;
+        margin-bottom: 20px;
+    }
+
+    .message-container {
+        height: 10px;
+        padding: 5px
+    }
 }
