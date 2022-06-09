@@ -161,14 +161,12 @@ body {
     }
 }
 
-.tile.pop{
-
-    animation-name:pop;
-    animation-duration: 100ms;
+.pop{
+  animation: 0.5s linear pop;
 }
 
 @keyframes pop {
-    from{
+    0%{
         transform: scale(0.8);
         opacity:0
     }

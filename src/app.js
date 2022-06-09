@@ -99,15 +99,13 @@ keys.forEach(key => {
 });
 
 const handleClick = (letter) => {
-    console.log('clicked', letter);
+    
     if (letter === '«') {
         deleteLetter();
-        console.log('guessRows', guessRows);
         return;
     }
     if (letter === 'ENTER') {
         checkValid();
-        console.log('guessRows', guessRows);
         return;
     }
     addLetter(letter);
@@ -133,7 +131,7 @@ const deleteLetter = () => {
         tile.textContent = '';
         guessRows[currentRow][currentTile] = '';
         tile.setAttribute('data', '');
-        tilePopRemove();
+        // tilePopRemove();
     }
 
 }
@@ -148,6 +146,7 @@ const checkRow = () => {
             showMessage('You got it!');
             isGameOver = true;
             tileAnimate();
+            currentRow++;
             resetBtn.style.visibility = "visible"; 
             updateWordle();
             return;
@@ -218,7 +217,7 @@ const flipTile = () => {
 
 const checkValid = () => {
     const guessStr = guessRows[currentRow].join('');
-    if(!WORDS.includes(guessStr.toLowerCase()) && currentTile > 4){
+    if(!WORDS.includes(guessStr.toLowerCase())){
         showMessage("Not in word list")
     }else {
         checkRow();
