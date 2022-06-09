@@ -131,7 +131,7 @@ const deleteLetter = () => {
         tile.textContent = '';
         guessRows[currentRow][currentTile] = '';
         tile.setAttribute('data', '');
-        // tilePopRemove();
+        tilePopRemove();
     }
 
 }
