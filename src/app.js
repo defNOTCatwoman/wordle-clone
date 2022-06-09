@@ -235,7 +235,7 @@ setTimeout(() => {
         setTimeout(() => {
             tile.classList.add('animate');
             
-        }, 500 * index)
+        }, 200 * index)
     })
 }, 2500)
 }
