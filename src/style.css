@@ -1,29 +1,51 @@
 * {
     color: white;
-    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
 }
 
 body {
     background-color: #121213;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
+
 
 .game-container {
     height: 90vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    flex-grow: 1;
+    overflow: hidden;
 }
 
 .title-container {
     text-align: center;
-    width: 510px;
+    width: 100%;
+    height: 45px;
     border-bottom: solid 1px #3a3a3c;
+    padding: 0;
+    margin: 0px;
+}
+
+.title-container p {
+
+    font-family: 'Crete Round', serif;
+    font-size: 30px;
+    margin: 0;
 }
 
 .tile-container {
     width: 330px;
+    margin-top: 10px;
     margin-bottom: 30px;
+    display: gri;
+    grid-gap: 5px;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .key-container {
@@ -106,6 +128,37 @@ body {
     }
 }
 
+.tile.animate {
+    animation-name: bounce;
+    animation-duration: 750ms;
+}
+
+@keyframes bounce {
+    0%, 20% {
+        transform: translateY(0px);
+    }
+
+    40% {
+        transform: translateY(-30px);
+    }
+
+    50% {
+        transform: translateY(5px);
+    }
+
+    60% {
+        transform: translateY(-15px);
+    }
+
+    80% {
+        transform: translateY(2px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
 .grey-overlay {
     background-color: #3a3a3c !important;
     border: none !important;
@@ -134,27 +187,34 @@ body {
     .key-container button {
         width: 26px;
         height: 38px;
-        margin: 4px;
+        margin: 2px;
+        padding: 1px;
         text-align: center;
     }
 
     .key-container button:nth-child(11) {
-        margin-left: 20px;
+        margin-left: 24px;
+    }
+    .key-container button:nth-child(19) {
+        margin-right: 10px;
     }
 
     .key-container button:nth-child(20),
     .key-container button:nth-child(28) {
         width: 47px;
     }
+    .key-container button:nth-child(20){
+        margin-left: 10px;
+    }
 
     .tile-container div {
         display: flex;
         justify-content: center;
     }
-    
+
     .tile-container .tile {
         width: 42px;
-        height:42px;
+        height: 42px;
         border: 2px solid #3a3a3c;
         box-sizing: border-box;
         display: flex;
@@ -163,6 +223,7 @@ body {
         color: white;
         margin: 2px;
     }
+
     .tile-container {
         width: 330px;
         margin-bottom: 20px;

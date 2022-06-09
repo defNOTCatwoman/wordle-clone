@@ -140,11 +140,12 @@ const checkRow = () => {
     const guess = guessRows[currentRow].join('');
 
     if (currentTile > 4) {
-        console.log('guess is ' + guess + ' wordle is ' + currentWord);
+      
         if (currentWord === guess) {
             flipTile();
             showMessage('You got it!');
             isGameOver = true;
+            tileAnimate();
             resetBtn.style.visibility = "visible"; 
             updateWordle();
             return;
@@ -220,4 +221,20 @@ const checkValid = () => {
     }else {
         checkRow();
     }
+}
+
+const tileAnimate = () => {
+    const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes;
+ 
+setTimeout(() => {
+
+
+    rowTiles.forEach((tile, index) => {
+        
+        setTimeout(() => {
+            tile.classList.add('animate');
+            
+        }, 500 * index)
+    })
+}, 2500)
 }
