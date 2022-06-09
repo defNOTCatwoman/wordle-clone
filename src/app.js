@@ -217,7 +217,7 @@ const flipTile = () => {
 
 const checkValid = () => {
     const guessStr = guessRows[currentRow].join('');
-    if(!WORDS.includes(guessStr.toLowerCase())){
+    if(!WORDS.includes(guessStr.toLowerCase()) && currentTile > 4){
         showMessage("Not in word list")
     }else {
         checkRow();
