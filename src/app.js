@@ -59,7 +59,7 @@ function updateWordle(){
 resetBtn.addEventListener('click', resetGame);
 
 function resetGame(){
-    returnwindow.location.reload();
+    return window.location.reload();
 }
 
 const guessRows = [
