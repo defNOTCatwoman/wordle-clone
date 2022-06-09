@@ -119,6 +119,7 @@ const addLetter = (letter) => {
         tile.textContent = letter;
         guessRows[currentRow][currentTile] = letter;
         tile.setAttribute('data', letter);
+        tilePop();
         currentTile++;
         console.log('guessRows', guessRows);
     }
@@ -132,6 +133,7 @@ const deleteLetter = () => {
         tile.textContent = '';
         guessRows[currentRow][currentTile] = '';
         tile.setAttribute('data', '');
+        tilePopRemove();
     }
 
 }
@@ -217,7 +219,7 @@ const flipTile = () => {
 const checkValid = () => {
     const guessStr = guessRows[currentRow].join('');
     if(!WORDS.includes(guessStr.toLowerCase())){
-        showMessage("Word not included on the list")
+        showMessage("Not in word list")
     }else {
         checkRow();
     }
@@ -237,4 +239,14 @@ setTimeout(() => {
         }, 500 * index)
     })
 }, 2500)
+}
+
+const tilePop =() => {
+    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile);
+    tile.classList.add('pop');
+}
+
+const tilePopRemove =() => {
+    const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile);
+    tile.classList.remove('pop');
 }

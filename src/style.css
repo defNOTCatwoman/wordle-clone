@@ -86,6 +86,8 @@ body {
     align-items: center;
     color: white;
     margin: 2px;
+    font-size: 25px;
+    font-weight: 600;
 }
 
 .message-container {
@@ -156,6 +158,23 @@ body {
 
     100% {
         transform: translateY(0px);
+    }
+}
+
+.tile.pop{
+
+    animation-name:pop;
+    animation-duration: 100ms;
+}
+
+@keyframes pop {
+    from{
+        transform: scale(0.8);
+        opacity:0
+    }
+    40%{
+        transform: scale(1.1);
+        opacity: 1;
     }
 }
 
