@@ -3,12 +3,21 @@ const tileDisplay = document.querySelector('.tile-container');
 const keyboard = document.querySelector('.key-container');
 const messageDisplay = document.querySelector('.message-container');
 const resetBtn = document.querySelector('.reset');
+const statsBtn = document.getElementById('statsBtn');
+const helpBtn = document.getElementById('helpBtn');
+const statsModal = document.getElementById('stats-modal');
+const helpModal = document.getElementById('help-modal');
+const statsClose = document.getElementById("stats-close");
+const helpClose = document.getElementById("help-close");
+
+
 const wordle = "";
 let currentWordle = WORDS[Math.floor(Math.random() * WORDS.length)].toUpperCase();
 let currentWordleIndex = 0;
 let currentWord;
 
 initLocalStorage();
+resetBtn.addEventListener('click', resetGame);
 
 const keys = [
     'Q',
@@ -41,29 +50,29 @@ const keys = [
     '«',
 ]
 
-function initLocalStorage(){
+function initLocalStorage() {
     const storedCurrentWordle =
-    window.localStorage.getItem("currentWordle");
-    if(!storedCurrentWordle){
+        window.localStorage.getItem("currentWordle");
+    if (!storedCurrentWordle) {
         window.localStorage.setItem("currentWordle", currentWordle)
     } else {
         currentWord = storedCurrentWordle;
     }
 }
 
-function updateWordle(){
-   window.localStorage.removeItem('currentWordle');
-   initLocalStorage();
-    
+function updateWordle() {
+    window.localStorage.removeItem('currentWordle');
+    initLocalStorage();
+
 }
 
-resetBtn.addEventListener('click', resetGame);
 
-function resetGame(){
+
+function resetGame() {
     return window.location.reload();
 }
 
-function showResult(){
+function showResult() {
     const totalWins = window.localStorage.getItem("totalWins") || 0;
     window.localStorage.setItem("totalWins", Number(totalWins) + 1);
 
@@ -72,12 +81,12 @@ function showResult(){
 }
 
 
-function showLosingResult(){
-    window.localStorage.setItem("currentStreak", 0 );
+function showLosingResult() {
+    window.localStorage.setItem("currentStreak", 0);
 }
 
 
-function updateTotalGames(){
+function updateTotalGames() {
     const totalGames = window.localStorage.getItem("totalGames") || 0;
     window.localStorage.setItem("totalGames", Number(totalGames) + 1);
 }
@@ -91,6 +100,7 @@ const guessRows = [
     ['', '', '', '', '']
 
 ]
+
 
 let currentRow = 0;
 let currentTile = 0;
@@ -106,6 +116,8 @@ guessRows.forEach((guessRow, guessRowIndex) => {
         rowElement.append(tileElement);
     })
     tileDisplay.append(rowElement);
+
+
 })
 
 
@@ -119,7 +131,7 @@ keys.forEach(key => {
 });
 
 const handleClick = (letter) => {
-    
+
     if (letter === '«') {
         deleteLetter();
         return;
@@ -160,7 +172,7 @@ const checkRow = () => {
     const guess = guessRows[currentRow].join('');
 
     if (currentTile > 4) {
-      
+
         if (currentWord === guess) {
             flipTile();
             showMessage('You got it!');
@@ -169,7 +181,7 @@ const checkRow = () => {
             currentRow++;
             showResult();
             updateTotalGames();
-            resetBtn.style.visibility = "visible"; 
+            resetBtn.style.visibility = "visible";
             updateWordle();
             return;
         } else {
@@ -177,7 +189,8 @@ const checkRow = () => {
                 isGameOver = true;
                 showMessage('Out of guesses');
                 showLosingResult();
-                resetBtn.style.visibility = "visible"; 
+                updateTotalGames();
+                resetBtn.style.visibility = "visible";
                 return;
             }
             if (currentRow < 5) {
@@ -240,35 +253,77 @@ const flipTile = () => {
 
 const checkValid = () => {
     const guessStr = guessRows[currentRow].join('');
-    if(!WORDS.includes(guessStr.toLowerCase()) && currentTile > 4){
+    if (!WORDS.includes(guessStr.toLowerCase()) && currentTile > 4) {
         showMessage("Not in word list")
-    }else {
+    } else {
         checkRow();
     }
 }
 
 const tileAnimate = () => {
     const rowTiles = document.querySelector('#guessRow-' + currentRow).childNodes;
- 
-setTimeout(() => {
+
+    setTimeout(() => {
 
 
-    rowTiles.forEach((tile, index) => {
-        
-        setTimeout(() => {
-            tile.classList.add('animate');
-            
-        }, 200 * index)
-    })
-}, 2500)
+        rowTiles.forEach((tile, index) => {
+
+            setTimeout(() => {
+                tile.classList.add('animate');
+
+            }, 200 * index)
+        })
+    }, 2500)
 }
 
-const tilePop =() => {
+const tilePop = () => {
     const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile);
     tile.classList.add('pop');
 }
 
-const tilePopRemove =() => {
+const tilePopRemove = () => {
     const tile = document.getElementById('guessRow-' + currentRow + '-tile-' + currentTile);
     tile.classList.remove('pop');
+}
+
+
+function updateStatsModal(){
+    const currentStreak = window.localStorage.getItem("currentStreak");
+    const totalGames = window.localStorage.getItem("totalGames");
+    const totalWins = window.localStorage.getItem("totalWins");
+
+    document.getElementById('total-played').textContent = totalGames;
+    document.getElementById('total-wins').textContent = totalWins;
+    document.getElementById('current-streak').textContent = currentStreak;
+
+    const winPct =Math.round((totalWins / totalGames) * 100) || 0;
+    document.getElementById('win-percent').textContent = winPct;
+
+
+}
+
+statsBtn.addEventListener('click', function() {
+    updateStatsModal();
+    statsModal.style.display="block";
+    
+})
+
+
+helpBtn.addEventListener('click', function() { 
+    helpModal.style.display="block";
+    
+})
+
+statsClose.addEventListener('click', function(){
+    statsModal.style.display="none";
+})
+
+helpClose.addEventListener('click', function(){
+    helpModal.style.display="none";
+})
+
+window.onclick = function(event){
+    if(event.target == statsModal) {
+        statsModal.style.display = "none";
+    }
 }
