@@ -52,14 +52,34 @@ function initLocalStorage(){
 }
 
 function updateWordle(){
-    localStorage.clear();
-    initLocalStorage();
+   window.localStorage.removeItem('currentWordle');
+   initLocalStorage();
+    
 }
 
 resetBtn.addEventListener('click', resetGame);
 
 function resetGame(){
     return window.location.reload();
+}
+
+function showResult(){
+    const totalWins = window.localStorage.getItem("totalWins") || 0;
+    window.localStorage.setItem("totalWins", Number(totalWins) + 1);
+
+    const currentStreak = window.localStorage.getItem("currentStreak") || 0;
+    window.localStorage.setItem("currentStreak", Number(currentStreak) + 1);
+}
+
+
+function showLosingResult(){
+    window.localStorage.setItem("currentStreak", 0 );
+}
+
+
+function updateTotalGames(){
+    const totalGames = window.localStorage.getItem("totalGames") || 0;
+    window.localStorage.setItem("totalGames", Number(totalGames) + 1);
 }
 
 const guessRows = [
@@ -147,6 +167,8 @@ const checkRow = () => {
             isGameOver = true;
             tileAnimate();
             currentRow++;
+            showResult();
+            updateTotalGames();
             resetBtn.style.visibility = "visible"; 
             updateWordle();
             return;
@@ -154,6 +176,7 @@ const checkRow = () => {
             if (currentRow >= 5) {
                 isGameOver = true;
                 showMessage('Out of guesses');
+                showLosingResult();
                 resetBtn.style.visibility = "visible"; 
                 return;
             }
