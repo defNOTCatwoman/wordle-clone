@@ -323,7 +323,8 @@ helpClose.addEventListener('click', function(){
 })
 
 window.onclick = function(event){
-    if(event.target == statsModal) {
+    if((event.target == statsModal) || (event.target == helpModal)) {
         statsModal.style.display = "none";
+        helpModal.style.display = "none";
     }
 }

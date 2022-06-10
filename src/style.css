@@ -305,6 +305,26 @@ body {
     animation-duration: 0.4s
   }
   
+.modal-body p {
+    font-size: 14px;
+}
+
+.modal-body .tile {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #3a3a3c;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    margin: 2px;
+}
+
+.modal-body #help-row {
+    display: flex;
+    flex-direction: row;
+}
   /* Add Animation */
   @-webkit-keyframes animatetop {
     from {top:-300px; opacity:0} 
